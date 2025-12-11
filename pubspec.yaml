@@ -1,0 +1,22 @@
+name: aws_iot_sigv4
+description: A Flutter package for connecting to AWS IoT Core using SigV4 signed temporary credentials
+version: 1.0.0
+homepage: https://github.com/moon-innovations/aws_iot_sigv4
+
+environment:
+  sdk: ^3.10.1
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.0
+  mqtt_client: ^10.0.0
+  crypto: ^3.0.0
+  convert: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
