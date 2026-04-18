@@ -100,8 +100,11 @@ class AwsIotService {
         },
       );
 
-      // Connect with a unique client ID
-      final clientId = 'flutter-iot-${DateTime.now().millisecondsSinceEpoch}';
+      // Use the server-assigned client ID when provided — the session policy
+      // is scoped to it exactly. Fall back to an auto-generated ID if the
+      // server didn't supply one.
+      final clientId = credentials.clientId ??
+          'flutter-iot-${DateTime.now().millisecondsSinceEpoch}';
       await _device!.connect(clientId);
 
       // Subscribe to topics for all allowed devices

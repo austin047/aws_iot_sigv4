@@ -8,6 +8,12 @@ class AwsIotCredentials {
   final String region;
   final List<String> allowedDeviceIds;
 
+  /// Optional MQTT client ID assigned by the credentials issuer. When set, the
+  /// backend's session policy is expected to scope `iot:Connect` to this exact
+  /// client ID, so the value from the server MUST be used verbatim. If null,
+  /// the package falls back to an auto-generated client ID.
+  final String? clientId;
+
   AwsIotCredentials({
     required this.accessKeyId,
     required this.secretAccessKey,
@@ -16,6 +22,7 @@ class AwsIotCredentials {
     required this.iotEndpoint,
     required this.region,
     required this.allowedDeviceIds,
+    this.clientId,
   });
 
   factory AwsIotCredentials.fromJson(Map<String, dynamic> json) {
@@ -27,6 +34,7 @@ class AwsIotCredentials {
       iotEndpoint: json['iotEndpoint'] as String,
       region: json['region'] as String,
       allowedDeviceIds: List<String>.from(json['allowedDeviceIds'] as List),
+      clientId: json['clientId'] as String?,
     );
   }
 
@@ -39,6 +47,7 @@ class AwsIotCredentials {
       'iotEndpoint': iotEndpoint,
       'region': region,
       'allowedDeviceIds': allowedDeviceIds,
+      if (clientId != null) 'clientId': clientId,
     };
   }
 }
